@@ -1,0 +1,7 @@
+#!/bin/sh
+export GRAILS_OPTS="-server -Xmx2048m -XX:MaxPermSize=512M -Dserver.port=8196 -Djava.awt.headless=true "
+
+if [ -f setEnvironment ]; then
+  . ./setEnvironment
+fi
+grails publish-plugin

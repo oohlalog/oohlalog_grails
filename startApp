@@ -1,0 +1,13 @@
+#!/bin/sh
+export GRAILS_OPTS="-server -Xmx2048m -XX:MaxPermSize=512M -Dserver.port=8196 -Djava.awt.headless=true "
+
+export GRAILS_OPTS="$GRAILS_OPTS -Dprocon.db.mode=local -Dprocon.mongo.mode=local -Dprocon.db.logSql=false -Duser.timezone=GMT -Dapp.context=/  -Dprocon.ssa.mode=off"
+
+if [ -f setEnvironment ]; then
+  . ./setEnvironment
+fi
+if [ "$1" == "debug" ]; then
+  grails-debug run-app
+else
+  grails run-app
+fi
