@@ -9,6 +9,7 @@ grails-app/.DS_Store
 .sass-cache
 /setEnvironment
 logs
+plugin.xml
 .rvmrc
 /plugins/platform-seven-ui-0.1/sencha-app/extjs/.architect
 /plugins/platform-seven-ui-0.1/web-app/js/app.html
