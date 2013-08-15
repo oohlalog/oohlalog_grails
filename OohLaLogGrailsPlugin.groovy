@@ -8,7 +8,7 @@ class OohLaLogGrailsPlugin {
 	def description     = "Grails Oohlalog Log4j Appender for Passing logs to the oohlalog API."
 	def documentation   = "https://github.com/oohlalog/oohlalog_grails"
 	def issueManagement = [ system: "GITHUB", url: "http://github.com/oohlalog/oohlalog_grails/issues" ]
-	def developers      = [ [ name: "Jeremy Leng", email: "jleng@bcap.com" ]]
+	def developers      = [ [ name: "Jeremy Leng", email: "jleng@bcap.com" ], [ name: "Brian Wheeler", email: "bwheeler@bcap.com" ]]
 	def scm             = [ url: "https://github.com/oohlalog/oohlalog_grails" ]
 	def license         = "APACHE"
 }
