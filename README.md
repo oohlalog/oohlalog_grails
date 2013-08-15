@@ -7,8 +7,6 @@ Usage
 -----
 Simply modify your Config.groovy file to add an appender to log4j.
 
-Example `grails-app/javascripts/application.js` :
-
 ```groovy
 log4j = {
   appenders {
@@ -16,7 +14,7 @@ log4j = {
   }
   root {
   	info 'oohlalog'
-	}
+  }
+}
 ```
-
 The above configuration will automatically forward log messages of info level or higher to your oohlalog app. Simply visit oohlalog.com to signup and get your api token.
