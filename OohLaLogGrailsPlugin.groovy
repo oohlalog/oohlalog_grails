@@ -1,7 +1,7 @@
 class OohLaLogGrailsPlugin {
 	def version         = "0.2-SNAPSHOT"
 	def grailsVersion   = "2.0 > *"
-	def title           = "OohLaLog Plugin" // Headline display name of the plugin
+	def title           = "Ooh La Log Plugin Plugin" // Headline display name of the plugin
 	def author          = "David Estes"
 	def authorEmail     = "dev@oohlalog.com"
 	def organization    = [ name: "OohLaLog", url: "http://www.oohlalog.com/" ]

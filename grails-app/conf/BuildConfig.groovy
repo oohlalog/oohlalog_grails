@@ -24,7 +24,6 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
-
     }
 
     dependencies {
