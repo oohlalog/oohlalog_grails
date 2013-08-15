@@ -11,7 +11,4 @@ class OohLaLogGrailsPlugin {
 	def developers      = [ [ name: "Jeremy Leng", email: "jleng@bcap.com" ]]
 	def scm             = [ url: "https://github.com/oohlalog/oohlalog_grails" ]
 	def license         = "APACHE"
-	def pluginExcludes = [
-		"grails-app/views/error.gsp"
-	]
 }

@@ -23,12 +23,12 @@ public class Payload {
 	static final String PAYLOAD_COUNTERS = "counters";
 
 	// Config
-	private String authToken = null;
-	private String host = null;
-	private String path = null;
+	private String authToken;
+	private String host;
+	private String path;
 	private int port = 80;
-	private List<LoggingEvent> messages = null;
-	private Map<String, Object> counters = null;
+	private List<LoggingEvent> messages;
+	private Map<String, Object> counters;
 
 	/**
 	 * lock constructor to require usage of the builder
@@ -107,12 +107,12 @@ public class Payload {
 	 */
 	public static void send( Payload pl ) throws RuntimeException {
 		OutputStream os = null;
-    BufferedReader rd  = null;
-    StringBuilder sb = null;
-    String line = null;
-    HttpURLConnection con = null;
+		BufferedReader rd = null;
+		StringBuilder sb = null;
+		String line = null;
+		HttpURLConnection con = null;
 		try {
-			System.out.println("Serializing: " + pl.toString());
+//			System.out.println("Serializing: " + pl.toString());
 			// Serialize payload into json
 			String json = serialize( pl );
 
@@ -136,14 +136,13 @@ public class Payload {
 			os = con.getOutputStream();
 			os.write( json.getBytes() );
 
-      rd  = new BufferedReader(new InputStreamReader(con.getInputStream()));
-      sb = new StringBuilder();
+			rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			sb = new StringBuilder();
 
-      while ((line = rd.readLine()) != null){
-          sb.append(line + '\n');
-      }
+			while ((line = rd.readLine()) != null){
+				sb.append(line + '\n');
+			}
 			//System.out.println( ">>>>>>>>>>>Received: " + sb.toString() );
-
 		}
 		catch ( Throwable t ) {
 			t.printStackTrace();
@@ -151,7 +150,7 @@ public class Payload {
 		finally {
 			if ( os != null ) {
 				try {
-				  con.disconnect();
+					con.disconnect();
 					os.flush();
 					os.close();
 					con = null;
@@ -227,12 +226,12 @@ public class Payload {
 	 * Builder pattern helper
 	 */
 	public static class Builder {
-		private String authToken = null;
-		private String host = null;
-		private String path = null;
+		private String authToken;
+		private String host;
+		private String path;
 		private int port = 80;
-		private List<LoggingEvent> messages = null;
-		private Map<String, Object> counters = null;
+		private List<LoggingEvent> messages;
+		private Map<String, Object> counters;
 
 		public Builder() {}
 		public Payload build() {
