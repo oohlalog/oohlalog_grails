@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class OohLaLogAppender extends AppenderSkeleton {
 	private Queue<LoggingEvent> queue = new ArrayDeque<LoggingEvent>();
-	private ExecutorService executorService = null;
+	private ExecutorService executorService;
 	private long timeBuffer = 60 * 1000;
 	private long lastFlush = System.currentTimeMillis();
 	private Object lock = new Object();
@@ -26,15 +26,14 @@ public class OohLaLogAppender extends AppenderSkeleton {
 	private String host = "api.oohlalog.com";
 	private String path = "/api/logging/save.json";
 	private int port = 80;
-	private String authToken = null;
+	private String authToken;
 
 	public OohLaLogAppender() {
-		super();
 		init();
 		startFlushTimer();
 	}
+
 	public OohLaLogAppender(int submissionThreadPool, int maxBuffer) {
-		super();
 		this.submissionThreadPool = submissionThreadPool;
 		this.maxBuffer = maxBuffer;
 		init();
@@ -50,17 +49,14 @@ public class OohLaLogAppender extends AppenderSkeleton {
 			flushQueue(queue, maxBuffer);
 	}
 
-	@Override
 	public boolean requiresLayout() {
 		return false;
 		// TODO: implement
 	}
 
-	@Override
 	public void close() {
-
-		flushQueue(this.queue);
-		this.shutdown.set( true );
+		flushQueue(queue);
+		shutdown.set( true );
 		executorService.shutdown();
 	}
 
@@ -91,7 +87,6 @@ public class OohLaLogAppender extends AppenderSkeleton {
 					.build();
 					Payload.send( pl );
 				}
-
 
 				lastFlush = System.currentTimeMillis();
 				flushing.set( false );
@@ -130,10 +125,10 @@ public class OohLaLogAppender extends AppenderSkeleton {
 	}
 
 	protected void init() {
-		if ( this.executorService != null ) {
-			this.executorService.shutdown();
+		if ( executorService != null ) {
+			executorService.shutdown();
 		}
-		this.executorService = Executors.newFixedThreadPool(this.submissionThreadPool);
+		executorService = Executors.newFixedThreadPool(submissionThreadPool);
 	}
 
 	protected void startFlushTimer() {
