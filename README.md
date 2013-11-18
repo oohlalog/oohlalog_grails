@@ -85,6 +85,7 @@ OohLaLog Tag
 
 You can include the OohLaLOg client-side JavaScript library with the tag oohlalog
 
+```html
 <html>
 <head>
 <g:oohlalog/>
@@ -93,6 +94,8 @@ You can include the OohLaLOg client-side JavaScript library with the tag oohlalo
 ...
 </body>
 </html>
+```
+
 
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
