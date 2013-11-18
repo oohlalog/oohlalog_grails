@@ -13,3 +13,8 @@ plugin.xml
 .rvmrc
 /plugins
 sencha-app/extjs/.architect
+
+/*.sha1
+
+/grails-ooh-la-log-0.2.4.zip.sha1
+/grails-ooh-la-log-0.2.3.zip.sha1

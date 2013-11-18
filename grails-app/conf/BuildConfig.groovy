@@ -11,12 +11,18 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile 'com.google.code.gson:gson:2.2.2'
+//        runtime 'com.google.code.gson:gson:2.2.2'
+//        compile 'com.google.code.gson:gson:2.2.2'
+//        build 'com.google.code.gson:gson:2.2.2'
     }
 
     plugins {
-       build ':release:2.2.1', ':rest-client-builder:1.0.3', {
+       build(":release:2.2.1", 
+            ":rest-client-builder:1.0.3",
+            ":tomcat:$grailsVersion",
+            ":hibernate:$grailsVersion") {
             export = false
         }
+
     }
 }
