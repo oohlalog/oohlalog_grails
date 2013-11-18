@@ -29,6 +29,23 @@ The following methods are available in all Domain Classes, Controllers, and Serv
 
 	oohlaLog(level, message, category = [artifact name], exceptionOrStringDetails = null, timestamp = System.currentTimeMillis() )
 ```
+These methods bypass Log4J level threshold checks.
+
+Example:
+```groovy
+class myService {
+	def myMethod() {
+        oohlaLog('debug','interesting!') //always sent to OohLaLog
+        oohlaCount('myMethod.called')
+	}
+
+	def myOtherMethod() {
+        log.debug('toooo interesting!') // not sent to OohLaLog is threshold is INFO (as above)
+	}
+
+}
+```
+
 To use these methods please configure the OohLaLoh log4j appender as mentioned above or add the following Config.groovy setting:
 
 ```groovy
