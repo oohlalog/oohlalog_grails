@@ -28,7 +28,7 @@ The following methods are available in all Domain Classes, Controllers, and Serv
 	oohlaCount(counterName, increment = 1)
 
 	oohlaLog(level, message, category = [artifact name], exceptionOrStringDetails = null, timestamp = System.currentTimeMillis() )
-
+```
 To use these methods please configure the OohLaLoh log4j appender as mentioned above or add the following Config.groovy setting:
 
 ```groovy
@@ -49,7 +49,7 @@ You may also enable Controller Action counters via configuration:
 	oohlalog.webtransactions.myController.myAction = 'myAct' // enables counting for a specific controller action with a custom counter namespace
 ```
 
-To use these methods please configure the OohLaLoh log4j appender as mentioned above or add the following Config.groovy setting:
+To use these configurations please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
 Annotation Support
 ------------------
