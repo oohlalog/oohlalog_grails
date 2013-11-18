@@ -100,16 +100,16 @@ class OohLaLogGrailsPlugin {
 
     }
 
-    def onChange = { event -> 
+    def onChange = { event ->
     	if (event.source) {
     		doWithSpring()
-    	} 
+    	}
     }
 
-	def onConfigChange = { event -> 
+	def onConfigChange = { event ->
     	if (event.source) {
     		doWithSpring()
-    	} 
+    	}
 	}
 
 
