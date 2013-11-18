@@ -4,7 +4,7 @@ import com.oohlalog.grails.OohLaLogWebTransaction
 import com.oohlalog.grails.OohLaLogFilters
 
 class OohLaLogGrailsPlugin {
-	def version         = "0.2.2"
+	def version         = "0.2.4"
 	def grailsVersion   = "2.0 > *"
 	def title           = "OohLaLog Plugin" // Headline display name of the plugin
 	def author          = "David Estes/Jeremy Leng"
@@ -16,6 +16,7 @@ class OohLaLogGrailsPlugin {
 	def developers      = [ [ name: "Jeremy Leng", email: "jleng@bcap.com" ], [ name: "Brian Wheeler", email: "bwheeler@bcap.com" ], [ name: "David Estes", email: "destes@bcap.com" ], [ name: "Jordon Saardchit", email: "jsaardchit@bcap.com" ]]
 	def scm             = [ url: "https://github.com/oohlalog/oohlalog_grails" ]
 	def license         = "APACHE"
+	def loadBefore      = ['database-migration']
     def pluginExcludes = [
         "grails-app/views/error.gsp",
         "grails-app/controllers/com/oohlalog/test/*",
@@ -62,11 +63,12 @@ class OohLaLogGrailsPlugin {
 
         application.controllerClasses.each {controller->
             OLLS.LOGGING_METHODS.each {k, v-> if (!controller.hasMetaMethod(k, getArgs(v))) controller.metaClass."${k}" = OLLS."${k}" }
-            def doAll = configDoAll
+            def doAll = configDoAll, doAllName = controller.logicalPropertyName + 'Controller'
             if (doAll == false && controller.hasProperty('oohLaLogCountActions')) {
                 doAll = (controller.getPropertyValue('oohLaLogCountActions') == true)
-			} else if (doAll == false  && controller.class.getAnnotation(OohLaLogWebTransaction) ) {
+			} else if (doAll == false  && controller.clazz.isAnnotationPresent(OohLaLogWebTransaction) ) {
 				doAll = true
+                doAllName = controller.clazz.getAnnotation(OohLaLogWebTransaction).value() ?: doAllName
 			}
 
             controller.clazz.declaredFields.each {field->
@@ -75,7 +77,7 @@ class OohLaLogGrailsPlugin {
 	//            	println 'FIELD checking '+field.name+' ' + field.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ field.getAnnotations()
 	            	if (doAll || a) {
 	            		def k = controller.logicalPropertyName + 'Controller.' + field.name
-						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.name() ?: k)
+						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.value() ?: (doAllName+'.'+field.name))
 	            	}
 	            }
             }
@@ -86,7 +88,7 @@ class OohLaLogGrailsPlugin {
 	            	//println 'METHOD checking '+method.name+' ' + method.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ method.getAnnotations()
 	            	if (doAll || a) {
 	            		def k = controller.logicalPropertyName + 'Controller.' + method.name
-						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.name() ?: k)
+						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.value() ?: (doAllName+'.'+method.name))
 	            	}
             	}
             }

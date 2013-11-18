@@ -16,21 +16,21 @@ class OohLaLogTestController {
 
     }
 
-    @OohLaLogWebTransaction(name='testOne')
+    @OohLaLogWebTransaction('testOne')
     def test1() {
 
         oohlaLog('debug','bingo1')
     	render text:'test1'
     }
 
-    @OohLaLogWebTransaction(name='testTwo')
+    @OohLaLogWebTransaction('testTwo')
     def test2 = {
 //        oohlaLog('debug','bingo2')
 
     	render text:'test2'
     }
 
-    @OohLaLogWebTransaction(name='testThree')
+    @OohLaLogWebTransaction('testThree')
     def test3() {
         oohlaLog('debug','bingo3')
         render text:'test3'
