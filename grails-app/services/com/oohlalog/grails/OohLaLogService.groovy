@@ -6,18 +6,15 @@ import org.apache.log4j.Level
 import org.apache.log4j.spi.LoggingEvent
 
 class OohLaLogService {
-	def serviceMethod() {
-		println CountLevel.COUNT
-	}
 	private static appender = null
 
-    static LOGGING_METHODS = [oohlaCount:2, oohlaLog:4]
+    static LOGGING_METHODS = [oohlaCount:2, oohlaLog:5]
 
 	static getOohLaLogAppender() {
 		if (!appender) {
-			println 'looking for OohLaLogAppender'
+			//println 'looking for OohLaLogAppender'
 			appender = Logger.rootLogger.getAllAppenders().find {
-				println it.class
+//				println it.class
 				it instanceof OohLaLogAppender
 			}
 			if (!appender) {
@@ -31,10 +28,10 @@ class OohLaLogService {
 		return appender
 	}
 
-	static oohlaCount = {counterName, int increment = 1 ->
-		println 'COUNTING '+counterName
+	static oohlaCount = {counterName = null, int increment = 1 ->
+//		println 'COUNTING '+counterName
 		def apdr = OohLaLogService.getOohLaLogAppender(),
-			logger = Logger.getLogger(counterName),
+			logger = Logger.getLogger(counterName ?: delegate.class),
 			loggingEvent = new LoggingEvent("org.apache.log4j.Logger",
 				                            logger, 
 				                            CountLevel.COUNT,
@@ -46,9 +43,9 @@ class OohLaLogService {
 
 	}
 
-	static oohlaLog = {level, message, details = null, timestamp = System.currentTimeMillis() ->
+	static oohlaLog = {level, message, category = null, details = null, timestamp = System.currentTimeMillis() ->
 		def apdr = OohLaLogService.getOohLaLogAppender(),
-			logger = Logger.getLogger(delegate.class),
+			logger = Logger.getLogger(category ?: delegate.class),
 			loggingEvent = new LoggingEvent("org.apache.log4j.Logger",
 				                            logger, 
 				                            Level.toLevel(level.toUpperCase(), CountLevel.COUNT),

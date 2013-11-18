@@ -4,7 +4,7 @@ import com.oohlalog.grails.OohLaLogWebTransaction
 import com.oohlalog.grails.OohLaLogFilters
 
 class OohLaLogGrailsPlugin {
-	def version         = "0.2.0"
+	def version         = "0.2.2"
 	def grailsVersion   = "2.0 > *"
 	def title           = "OohLaLog Plugin" // Headline display name of the plugin
 	def author          = "David Estes/Jeremy Leng"
@@ -23,6 +23,7 @@ class OohLaLogGrailsPlugin {
         "grails-app/services/com/oohlalog/test/*"
     ]
     def watchedResources = [
+        "file:./grails-app/conf/*Filters.groovy",
         "file:./grails-app/services/*.groovy",
         "file:./grails-app/domain/*.groovy",
         "file:./grails-app/controller/*.groovy"
@@ -34,7 +35,7 @@ class OohLaLogGrailsPlugin {
     def doWithSpring = {
         for(service in application.serviceClasses) {
             if (service.logicalPropertyName != 'oohLaLog') {
-	        	println 'adding methods to ' + service.logicalPropertyName+'Service'
+	        	//println 'adding methods to ' + service.logicalPropertyName+'Service'
             	OLLS.LOGGING_METHODS.each {k, v-> if (!service.hasMetaMethod(k, getArgs(v))) service.metaClass."${k}" = OLLS."${k}" }
             }
         }
@@ -44,7 +45,6 @@ class OohLaLogGrailsPlugin {
         	if (application.config.oohlalog.webtransactions == true) configDoAll = true
         	else if (application.config.oohlalog.webtransactions instanceof Map) {
         		application.config.oohlalog.webtransactions.each {k, v->
-        			k = k.replaceAll('Controller','')
         			if (v == true) {
         				OohLaLogFilters.addWebTransaction(k, k)
         			} else if (v instanceof Map) {
@@ -70,27 +70,31 @@ class OohLaLogGrailsPlugin {
 			}
 
             controller.clazz.declaredFields.each {field->
-            	OohLaLogWebTransaction a = (OohLaLogWebTransaction)field.getAnnotation(OohLaLogWebTransaction)
-//            	println 'FIELD checking '+field.name+' ' + field.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ field.getAnnotations()
-            	if (doAll || a) {
-            		def k = controller.logicalPropertyName + '.' + field.name
-					if (OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.name() ?: k)
-            	}
-
+            	if (field.isAnnotationPresent(grails.web.Action)) {
+	            	OohLaLogWebTransaction a = (OohLaLogWebTransaction)field.getAnnotation(OohLaLogWebTransaction)
+	//            	println 'FIELD checking '+field.name+' ' + field.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ field.getAnnotations()
+	            	if (doAll || a) {
+	            		def k = controller.logicalPropertyName + 'Controller.' + field.name
+						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.name() ?: k)
+	            	}
+	            }
             }
 
             controller.clazz.declaredMethods.each {method->
-            	OohLaLogWebTransaction a = (OohLaLogWebTransaction)method.getAnnotation(OohLaLogWebTransaction)
-//            	println 'METHOD checking '+method.name+' ' + method.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ method.getAnnotations()
-            	if (doAll || a) {
-            		def k = grails.util.GrailsNameUtils.getPropertyName(controller.class) + '.' + method.name
-					if (OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.name() ?: k)
+            	if (method.isAnnotationPresent(grails.web.Action)) {
+	            	OohLaLogWebTransaction a = (OohLaLogWebTransaction)method.getAnnotation(OohLaLogWebTransaction)
+	            	//println 'METHOD checking '+method.name+' ' + method.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ method.getAnnotations()
+	            	if (doAll || a) {
+	            		def k = controller.logicalPropertyName + 'Controller.' + method.name
+						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.name() ?: k)
+	            	}
             	}
             }
         }
         for(domain in application.domainClasses) {
             OLLS.LOGGING_METHODS.each {k, v-> if (!domain.hasMetaMethod(k, getArgs(v))) domain.metaClass."${k}" = OLLS."${k}" }
         }
+//        println OohLaLogFilters.CONFIGURED_CONTROLLER_NAMES
 
     }
 

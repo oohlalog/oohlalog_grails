@@ -4,7 +4,7 @@ class OohLaLogFilters {
 	static private CONFIGURED_CONTROLLER_NAMES = [:]
 
 	static addWebTransaction(controllerActionName, transactionName) {
-		println 'adding webtransaction ' + controllerActionName + '='+transactionName
+		//println 'adding webtransaction ' + controllerActionName + '='+transactionName
 		CONFIGURED_CONTROLLER_NAMES[controllerActionName] =  transactionName
 	}
 
@@ -22,7 +22,7 @@ class OohLaLogFilters {
         all(controller:'*', action:'*') {
             after = { Map model ->
 //            	println 'checking '+controllerName+' and '+controllerName+'.'+actionName
-            	def transactionName = CONFIGURED_CONTROLLER_NAMES[controllerName+'.'+actionName] ?: CONFIGURED_CONTROLLER_NAMES[controllerName]
+            	def transactionName = CONFIGURED_CONTROLLER_NAMES[controllerName+'Controller.'+actionName] ?: CONFIGURED_CONTROLLER_NAMES[controllerName+'Controller']
 				if (transactionName) {
 					OohLaLogService.oohlaCount(transactionName)
 				}

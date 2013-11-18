@@ -1,6 +1,7 @@
 import com.oohlalog.log4j.*
 
-oohlalog.webtransactions.oohLaLogTestController.test2 = 'testTwo'
+//oohlalog.webtransactions.oohLaLogTestController.test2 = 'testTwo'
+oohlalog.webtransactions = true
 
 log4j = {
 	error	'org.codehaus.groovy.grails.web.servlet',  //  controllers
@@ -21,7 +22,7 @@ log4j = {
 	        layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} | %p | %c | %t | %m | %x%n')
 	    rollingFile name: 'stacktrace', maxFileSize: (1 * 1024 * 1024), file: 'stacktrace.log', maxBackupIndex: 1,
 	        layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} | %p | %c | %t | %m | %x%n')
-	    appender new OohLaLogAppender( name: "oohlalog", authToken: "4da6d3ab-e714-4c72-bf2d-83ebb5fe548e", maxBuffer:"3", host: "api.oohlalog.com")
+	    appender new OohLaLogAppender( name: "oohlalog", authToken: "5950bbca-5d91-4d9b-81dd-38c5b42d844d", maxBuffer:3, host: "localhost", port:8196, debug:true)
 	}
 	root {
 	info 'stdout', 'grailsLog', 'oohlalog'
