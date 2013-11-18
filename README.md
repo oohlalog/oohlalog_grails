@@ -80,19 +80,16 @@ You may also enable controler Controller Action counters via Annotation. The Ann
 	class MyController {
 
 	    def test() { 
-	    	render text:'test!!!'
+	    	render text:'test!!!' // counts as "mycont.test"
 	    }
 
 		
 		@OohLaLogWebTransaction('my.idx')
 	    def index() { 
-	    	render text:'index!!!'
+	    	render text:'index!!!' // counts as "my.idx"
 	    }
 	}
 ```
-
-Requests to MyController.test will count as "mycont.test". 
-Requests to MyController.index will count as "my.idx"
 
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
