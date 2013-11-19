@@ -22,7 +22,7 @@ class OohLaLogTagLib {
 			category = attrs.remove('category') ?: 'myCategory',
 			level = attrs.remove('level') ?: 'INFO',
 			apd = oohLaLogService.getOohLaLogAppender()
-		out << ('<img src="'+(apd.secure?'https':'http')+'://'+apd.host+':'+apd.port+'/log/image/'+apd.authToken+'/'+level.encodeAsURL()+'/'+category.encodeAsURL+'/'+message.encodeAsURL()+ '" class="oloLogsImage"/>')
+		out << ('<img src="'+(apd.secure?'https':'http')+'://'+apd.host+':'+apd.port+'/log/image/'+apd.authToken+'/'+level.encodeAsURL()+'/'+category.encodeAsURL()+'/'+message.encodeAsURL()+ '" class="oloLogsImage"/>')
 	}
 
 }
