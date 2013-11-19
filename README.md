@@ -111,10 +111,10 @@ olo:logImage - adds an image that will submit a log when loaded by a client
 <body>
 <input type="button" value="Count!" onclick="olo.count('mycounter',1);"/>
 Counter Image
-<olo.counterImage name="myImageCounter"/>
+<olo:counterImage name="myImageCounter"/>
 <br/>
 Log Image
-<olo.logImage level="INFO" category="myCat" message="hello world"/>
+<olo:logImage level="INFO" category="myCat" message="hello world"/>
 </body>
 </html>
 ```
