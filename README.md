@@ -97,7 +97,11 @@ To use the taglib please configure the OohLaLoh log4j appender or Config setting
 OohLaLog Tag
 ------------
 
-You can include the OohLaLOg client-side JavaScript library with the tag oohlalog
+Therea re three tags available:
+
+olo:lib - adds and configures the JavaScript library
+olo:counterImage - adds an image that will increment a counter when loaded by a client
+olo:logImage - adds an image that will submit a log when loaded by a client
 
 ```html
 <html>
@@ -105,7 +109,12 @@ You can include the OohLaLOg client-side JavaScript library with the tag oohlalo
 <g:oohlalog/>
 </head>
 <body>
-...
+<input type="button" value="Count!" onclick="olo.count('mycounter',1);"/>
+Counter Image
+<olo.counterImage name="myImageCounter"/)
+<br/>
+Log Image
+<olo.logImage level="INFO" category="myCat" message="hello world"/)
 </body>
 </html>
 ```
