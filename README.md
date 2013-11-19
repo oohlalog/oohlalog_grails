@@ -142,7 +142,7 @@ Web Browser Logging and Counting
 
 There are three tags available:
 
-- **&lt;olo:lib/&gt;** - adds and configures the JavaScript library. the OohLaLog API global is "olo".
+- **&lt;olo:lib/&gt;** - adds and configures the JavaScript library. Accepts "version" and "minified" attributes. The OohLaLog API JS global is "olo".
 - **&lt;olo:counterImage/&gt;** - adds an image that will increment a counter when loaded by a client. Accepts "*name*" attribute.
 - **&lt;olo:logImage/&gt;** - adds an image that will submit a log when loaded by a client. Accepts "*level*", "*category*", and "*message*" attributes.
 
@@ -186,6 +186,17 @@ olo.logger.get(cfg)
 olo.logger.save(cfg)
 olo.logger.delete(cfg)
 ```
+
+*Examples:*
+```javascript
+olo.counter.increment({code:'TEST-CT-1',callback:function(obj){alert('success='+obj.success)}});
+olo.counter.get({code:'TEST-CT-1',callback:function(obj){alert('count='+obj.data.count)}});
+olo.warn('my msg','my cat');
+olo.logger.save({category:'spanky',level:'DEBUG',message:'Howdy',callback:function(obj){alert('success='+obj.success)}});
+olo.trace('my msg','my cat');
+
+```
+
 
 All methods support chaining.
 
