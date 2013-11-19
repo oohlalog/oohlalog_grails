@@ -8,7 +8,7 @@ import org.apache.log4j.spi.LoggingEvent
 class OohLaLogService {
 	private static appender = null
 
-    static LOGGING_METHODS = [oohlaCount:2, oohlaLog:5]
+    static LOGGING_METHODS = [oohlaCount:2, oohlaLog:6]
 
 	static getOohLaLogAppender() {
 		if (!appender) {
@@ -43,7 +43,7 @@ class OohLaLogService {
 
 	}
 
-	static oohlaLog = {level, message, category = null, details = null, timestamp = System.currentTimeMillis() ->
+	static oohlaLog = {level, message, category = null, details = null, token = null, timestamp = System.currentTimeMillis() ->
 		def apdr = OohLaLogService.getOohLaLogAppender(),
 			logger = Logger.getLogger(category ?: delegate.class),
 			loggingEvent = new LoggingEvent("org.apache.log4j.Logger",
@@ -55,6 +55,7 @@ class OohLaLogService {
 
 		if ( !(details instanceof Throwable) && details != null) loggingEvent.setProperty('details', details.toString())
 		if ( timestamp != null) loggingEvent.setProperty('timestamp', timestamp.toString())
+		if ( token != null) loggingEvent.setProperty('token', token)
 		apdr.append(loggingEvent)
 	}
 

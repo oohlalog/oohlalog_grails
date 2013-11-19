@@ -7,6 +7,7 @@ Usage
 -----
 Modify your Config.groovy file to add an appender to log4j.
 
+*Example:*
 ```groovy
 log4j = {
   appenders {
@@ -38,12 +39,15 @@ The following methods are available in all Domain Classes, Controllers, and Serv
 	void oohlaCount(String counterName, int increment = 1)
 
 	void oohlaLog(String level, String message, String category = "[artifact name]", 
-	         Object exceptionOrStringDetails = null, Long timestamp = System.currentTimeMillis() )
+	         Object exceptionOrStringDetails = null, String token = null, Long timestamp = System.currentTimeMillis() )
 ```
 These methods bypass Log4J level threshold checks.
+
 Level should be one of the standard log4J levels (TRACE, DEBUG, INFO, WARN, ALL, ERROR, FATAL)
 
-Example:
+Token can be used to relate a sequence of logs together (i.e. specific user activity)
+
+*Example:*
 ```groovy
 class myService {
 	def myMethod() {
@@ -78,6 +82,7 @@ Additional Configuration Options
 --------------------------------
 You may enable Controller Action counters by adding a static property to your Controllers:
 
+*Example:*
 ```groovy
 	class MyController {
 		static oohLaLogCountActions = true
@@ -105,7 +110,7 @@ Annotation Support
 
 You may also enable controler Controller Action counters via Annotation. The Annotation can be used for the Controller class and the Controller Actions:
 
-
+*Example:*
 ```groovy
 	import com.oohlalog.grails.OohLaLogWebTransaction
 	@OohLaLogWebTransaction('mycont')
@@ -135,6 +140,7 @@ olo:lib - adds and configures the JavaScript library
 olo:counterImage - adds an image that will increment a counter when loaded by a client
 olo:logImage - adds an image that will submit a log when loaded by a client
 
+*Example:*
 ```html
 <html>
 <head>
