@@ -4,7 +4,7 @@ import com.oohlalog.grails.OohLaLogWebTransaction
 import com.oohlalog.grails.OohLaLogFilters
 
 class OohLaLogGrailsPlugin {
-	def version         = "0.2.5"
+	def version         = "0.2.6"
 	def grailsVersion   = "2.0 > *"
 	def title           = "OohLaLog Plugin" // Headline display name of the plugin
 	def author          = "David Estes/Jeremy Leng"

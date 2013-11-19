@@ -17,6 +17,16 @@ log4j = {
   }
 }
 ```
+Appender properties:
+
+- host ["api.oohlalog.com"]
+- path ["/api/logging/save.json"]
+- port [80]
+- secure [false]
+- debug [false]
+- hostName [null] // how the log source will appear
+
+
 The above configuration will automatically forward log messages of info level or higher to your oohlalog app. Simply visit oohlalog.com to signup and get your api token.
 
 Grails Artefact Methods
@@ -25,22 +35,24 @@ Grails Artefact Methods
 The following methods are available in all Domain Classes, Controllers, and Services
 
 ```groovy
-	oohlaCount(counterName, increment = 1)
+	void oohlaCount(String counterName, int increment = 1)
 
-	oohlaLog(level, message, category = [artifact name], exceptionOrStringDetails = null, timestamp = System.currentTimeMillis() )
+	void oohlaLog(String level, String message, String category = "[artifact name]", 
+	         Object exceptionOrStringDetails = null, Long timestamp = System.currentTimeMillis() )
 ```
 These methods bypass Log4J level threshold checks.
+Level should be one of the standard log4J levels (TRACE, DEBUG, INFO, WARN, ALL, ERROR, FATAL)
 
 Example:
 ```groovy
 class myService {
 	def myMethod() {
-        oohlaLog('debug','interesting!') //always sent to OohLaLog
+        oohlaLog('DEBUG','interesting!') //always sent to OohLaLog
         oohlaCount('myMethod.called')
 	}
 
 	def myOtherMethod() {
-        log.debug('toooo interesting!') // not sent to OohLaLog is threshold is INFO (as above)
+        log.debug('toooo interesting!') // not sent to OohLaLog if threshold is INFO (as above)
 	}
 
 }
@@ -49,14 +61,34 @@ class myService {
 To use these methods please configure the OohLaLoh log4j appender as mentioned above or add the following Config.groovy setting:
 
 ```groovy
-	oohlalog.authToken='XXXX-XXXX-XXXXXXX'
+	oohlalog.authToken='XXXX-XXXX-XXXXXXX'// REQUIRED 
+	oohlalog.host="api.oohlalog.com"// OPTIONAL 
+	oohlalog.path="/api/logging/save.json" // OPTIONAL 
+	oohlalog.port=80 // OPTIONAL 
+	oohlalog.secure=false // OPTIONAL 
+	oohlalog.debug=false // OPTIONAL 
+	oohlalog.hostName=null // OPTIONAL how the log source will appear
 ```
+
+Appender properties:
+
 
 
 Additional Configuration Options
 --------------------------------
+You may enable Controller Action counters by adding a static property to your Controllers:
 
-You may also enable Controller Action counters via configuration:
+```groovy
+	class MyController {
+		static oohLaLogCountActions = true
+
+		...
+
+	}
+```
+
+
+You may also enable Controller Action counters via Config.groovy configuration:
 
 ```groovy
 	oohlalog.webtransactions = true // globally enables counting 
