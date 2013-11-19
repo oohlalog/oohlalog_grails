@@ -39,7 +39,8 @@ The following methods are available in all Domain Classes, Controllers, and Serv
 	void oohlaCount(String counterName, int increment = 1)
 
 	void oohlaLog(String level, String message, String category = "[artifact name]", 
-	         Object exceptionOrStringDetails = null, String token = null, Long timestamp = System.currentTimeMillis() )
+	         Object exceptionOrStringDetails = null, String token = null, 
+	         Long timestamp = System.currentTimeMillis() )
 ```
 These methods bypass Log4J level threshold checks.
 
