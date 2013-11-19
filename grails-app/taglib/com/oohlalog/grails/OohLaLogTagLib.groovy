@@ -15,14 +15,14 @@ class OohLaLogTagLib {
 	def counterImage = {attrs, body->
 		def name = attrs.remove('name') ?: 'myImageCounter',
 			apd = oohLaLogService.getOohLaLogAppender()
-		out << ('<img src="'+(apd.secure?'https':'http')+'://'+apd.host+':'+apd.port+'/count/image/'+apd.authToken+'/'+name.encodeAsURL()+'" class="oloCounterImage"/>')
+		out << ('<img src="'+(apd.secure?'https':'http')+'://'+apd.host+':'+apd.port+'/api/count/image/'+apd.authToken+'/'+name.encodeAsURL()+'" class="oloCounterImage"/>')
 	}
 	def logImage = {attrs, body->
 		def message = attrs.remove('message') ?: 'myMessage',
 			category = attrs.remove('category') ?: 'myCategory',
 			level = attrs.remove('level') ?: 'INFO',
 			apd = oohLaLogService.getOohLaLogAppender()
-		out << ('<img src="'+(apd.secure?'https':'http')+'://'+apd.host+':'+apd.port+'/log/image/'+apd.authToken+'/'+level.encodeAsURL()+'/'+category.encodeAsURL()+'/'+message.encodeAsURL()+ '" class="oloLogsImage"/>')
+		out << ('<img src="'+(apd.secure?'https':'http')+'://'+apd.host+':'+apd.port+'/api/log/image/'+apd.authToken+'/'+level.encodeAsURL()+'/'+category.encodeAsURL()+'/'+message.encodeAsURL()+ '" class="oloLogsImage"/>')
 	}
 
 }
