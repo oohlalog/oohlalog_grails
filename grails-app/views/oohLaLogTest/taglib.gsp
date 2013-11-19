@@ -7,10 +7,10 @@ Taglib Test<br/>
 <input type="button" value="Count!" onclick="olo.count('mycounter',1);"/>
 <br/>
 Counter Image
-<olo.counterImage/)
+<olo.counterImage/>
 <br/>
 Log Image
-<olo.logImage/)
+<olo.logImage/>
 
 </body>
 </html>
