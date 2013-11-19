@@ -66,13 +66,13 @@ class myService {
 To use these methods please configure the OohLaLoh log4j appender as mentioned above or add the following Config.groovy setting:
 
 ```groovy
-	oohlalog.authToken='XXXX-XXXX-XXXXXXX'// REQUIRED 
-	oohlalog.host="api.oohlalog.com"// OPTIONAL 
-	oohlalog.path="/api/logging/save.json" // OPTIONAL 
-	oohlalog.port=80 // OPTIONAL 
-	oohlalog.secure=false // OPTIONAL 
-	oohlalog.debug=false // OPTIONAL 
-	oohlalog.hostName=null // OPTIONAL how the log source will appear
+oohlalog.authToken='XXXX-XXXX-XXXXXXX'// REQUIRED 
+oohlalog.host="api.oohlalog.com"// OPTIONAL 
+oohlalog.path="/api/logging/save.json" // OPTIONAL 
+oohlalog.port=80 // OPTIONAL 
+oohlalog.secure=false // OPTIONAL 
+oohlalog.debug=false // OPTIONAL 
+oohlalog.hostName=null // OPTIONAL how the log source will appear
 ```
 
 Appender properties:
@@ -103,11 +103,11 @@ All action requests will be counted as "[Controller name].[Action name]"
 You may also enable Controller Action counters via Config.groovy configuration:
 
 ```groovy
-	oohlalog.webtransactions = true // globally enables counting 
-	oohlalog.webtransactions.myController = true // enables counting for a specific controller
-	oohlalog.webtransactions.myController = 'MyCtrlr' // enables counting for a specific controller with a custom counter namespace
-	oohlalog.webtransactions.myController.myAction = true // enables counting for a specific controller action the default counter name
-	oohlalog.webtransactions.myController.myAction = 'myAct' // enables counting for a specific controller action with a custom counter namespace
+oohlalog.webtransactions = true // globally enables counting 
+oohlalog.webtransactions.myController = true // enables counting for a specific controller
+oohlalog.webtransactions.myController = 'MyCtrlr' // enables counting for a specific controller with a custom counter namespace
+oohlalog.webtransactions.myController.myAction = true // enables counting for a specific controller action the default counter name
+oohlalog.webtransactions.myController.myAction = 'myAct' // enables counting for a specific controller action with a custom counter namespace
 ```
 
 To use these configurations please configure the OohLaLoh log4j appender or Config setting as mentioned above.
@@ -142,7 +142,7 @@ Web Browser Logging and Counting
 
 There are three tags available:
 
-- **&lt;olo:lib/&gt;** - adds and configures the JavaScript library
+- **&lt;olo:lib/&gt;** - adds and configures the JavaScript library. the OohLaLog API global is "olo".
 - **&lt;olo:counterImage/&gt;** - adds an image that will increment a counter when loaded by a client. Accepts "*name*" attribute.
 - **&lt;olo:logImage/&gt;** - adds an image that will submit a log when loaded by a client. Accepts "*level*", "*category*", and "*message*" attributes.
 
@@ -163,6 +163,25 @@ Log Image
 </html>
 ```
 
+*JavaScript API:*
+- olo.count(code,incr,name+,callback+, apiKey+)
+- olo.info(msg,category,details+,priority+,token+,callback+,apiKey+)
+- olo.warn(msg,category,details+,priority+,token+,callback+,apiKey+)
+- olo.error(msg,category,details+,priority+,token+,callback+,apiKey+)
+- olo.debug(msg,category,details+,priority+,token+,callback+,apiKey+)
+- olo.trace(msg,category,details+,priority+,token+,callback+,apiKey+)
+
++ OPTIONAL
+
+*Low Level API:*
+- olo.counter.get(cfg)
+- olo.counter.increment(cfg)
+- olo.counter.reset(cfg)
+- olo.logger.get(cfg)
+- olo.logger.save(cfg)
+- olo.logger.delete(cfg)
+
+All methods support chaining.
 
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
