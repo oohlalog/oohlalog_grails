@@ -94,8 +94,8 @@ You may also enable controler Controller Action counters via Annotation. The Ann
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
 
-OohLaLog Tag
-------------
+OohLaLog TagLib
+---------------
 
 Therea re three tags available:
 
