@@ -106,7 +106,7 @@ olo:logImage - adds an image that will submit a log when loaded by a client
 ```html
 <html>
 <head>
-<g:oohlalog/>
+<olo:lib/>
 </head>
 <body>
 <input type="button" value="Count!" onclick="olo.count('mycounter',1);"/>
