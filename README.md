@@ -3,8 +3,8 @@ OohLaLog Grails Plugin
 The Grails OohLaLog plugin adds a log4j appender to forward traffic to the oohlalog api service. This allows its users to aggregate logs across multiple servers, setup alarms, custom counters, and realtime monitor their application.
 
 
-Usage
------
+Log4J Appender
+--------------
 Modify your Config.groovy file to add an appender to log4j.
 
 *Example:*
@@ -30,8 +30,8 @@ Appender properties:
 
 The above configuration will automatically forward log messages of info level or higher to your oohlalog app. Simply visit oohlalog.com to signup and get your api token.
 
-Grails Artefact Methods
------------------------
+Grails Artefact Logging and Counting
+------------------------------------
 
 The following methods are available in all Domain Classes, Controllers, and Services
 
@@ -78,8 +78,11 @@ Appender properties:
 
 
 
-Additional Configuration Options
---------------------------------
+Web Transaction Counting
+------------------------
+
+**Static Property**
+
 You may enable Controller Action counters by adding a static property to your Controllers:
 
 *Example:*
@@ -92,6 +95,9 @@ You may enable Controller Action counters by adding a static property to your Co
 	}
 ```
 
+All action requests will be counted as "[Controller name].[Action name]"
+
+**Config.groovy**
 
 You may also enable Controller Action counters via Config.groovy configuration:
 
@@ -105,8 +111,7 @@ You may also enable Controller Action counters via Config.groovy configuration:
 
 To use these configurations please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
-Annotation Support
-------------------
+**Annotations**
 
 You may also enable controler Controller Action counters via Annotation. The Annotation can be used for the Controller class and the Controller Actions:
 
@@ -131,14 +136,14 @@ You may also enable controler Controller Action counters via Annotation. The Ann
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
 
-OohLaLog TagLib
----------------
+Web Browser Logging and Counting
+--------------------------------
 
-Therea re three tags available:
+There are three tags available:
 
-olo:lib - adds and configures the JavaScript library
-olo:counterImage - adds an image that will increment a counter when loaded by a client
-olo:logImage - adds an image that will submit a log when loaded by a client
+- **&lt;olo:lib/&gt;** - adds and configures the JavaScript library
+- **&lt;olo:counterImage/&gt;** - adds an image that will increment a counter when loaded by a client. Accepts "*name*" attribute.
+- **&lt;olo:logImage/&gt;** - adds an image that will submit a log when loaded by a client. Accepts "*level*", "*category*", and "*message*" attributes.
 
 *Example:*
 ```html
