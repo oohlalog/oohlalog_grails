@@ -164,22 +164,28 @@ Log Image
 ```
 
 *JavaScript API:*
-- olo.count(code,incr,name+,callback+, apiKey+)
-- olo.info(msg,category,details+,priority+,token+,callback+,apiKey+)
-- olo.warn(msg,category,details+,priority+,token+,callback+,apiKey+)
-- olo.error(msg,category,details+,priority+,token+,callback+,apiKey+)
-- olo.debug(msg,category,details+,priority+,token+,callback+,apiKey+)
-- olo.trace(msg,category,details+,priority+,token+,callback+,apiKey+)
 
-+ OPTIONAL
+```javascript
+olo.count(code,incr,name+,callback+, apiKey+)
+olo.info(msg,category,details+,priority+,token+,callback+,apiKey+)
+olo.warn(msg,category,details+,priority+,token+,callback+,apiKey+)
+olo.error(msg,category,details+,priority+,token+,callback+,apiKey+)
+olo.debug(msg,category,details+,priority+,token+,callback+,apiKey+)
+olo.trace(msg,category,details+,priority+,token+,callback+,apiKey+)
+```
+
++optional
 
 *Low Level API:*
-- olo.counter.get(cfg)
-- olo.counter.increment(cfg)
-- olo.counter.reset(cfg)
-- olo.logger.get(cfg)
-- olo.logger.save(cfg)
-- olo.logger.delete(cfg)
+
+```javascript
+olo.counter.get(cfg)
+olo.counter.increment(cfg)
+olo.counter.reset(cfg)
+olo.logger.get(cfg)
+olo.logger.save(cfg)
+olo.logger.delete(cfg)
+```
 
 All methods support chaining.
 
