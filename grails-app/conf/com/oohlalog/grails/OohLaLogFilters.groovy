@@ -24,7 +24,14 @@ class OohLaLogFilters {
 //            	println 'checking '+controllerName+' and '+controllerName+'.'+actionName
             	def transactionName = CONFIGURED_CONTROLLER_NAMES[controllerName+'Controller.'+actionName] ?: CONFIGURED_CONTROLLER_NAMES[controllerName+'Controller']
 				if (transactionName) {
-					OohLaLogService.oohlaCount(transactionName)
+					if (transactionName == 'REQUESTED_URL') {
+						def tokens = request.forwardURI.tokenize('/'),
+							last = tokens.remove(tokens.size() - 1)
+						OohLaLogService.oohlaCount(tokens.join('/') + '.'+last)
+					} else {
+						OohLaLogService.oohlaCount(transactionName)
+
+					}
 				}
             }
         }

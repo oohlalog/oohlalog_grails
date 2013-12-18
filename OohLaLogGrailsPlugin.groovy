@@ -4,7 +4,7 @@ import com.oohlalog.grails.OohLaLogWebTransaction
 import com.oohlalog.grails.OohLaLogFilters
 
 class OohLaLogGrailsPlugin {
-	def version         = "0.2.6"
+	def version         = "0.2.7"
 	def grailsVersion   = "2.0 > *"
 	def title           = "OohLaLog Plugin" // Headline display name of the plugin
 	def author          = "David Estes/Jeremy Leng"
@@ -41,9 +41,11 @@ class OohLaLogGrailsPlugin {
             }
         }
         OohLaLogFilters.clearWebTransactions()
-        def configDoAll = false
+        def configDoAll = false,
+            requestURI = false
         if (application.config.oohlalog.containsKey('webtransactions') ) {
         	if (application.config.oohlalog.webtransactions == true) configDoAll = true
+            if (application.config.oohlalog.requestURI == true) requestURI = true
         	else if (application.config.oohlalog.webtransactions instanceof Map) {
         		application.config.oohlalog.webtransactions.each {k, v->
         			if (v == true) {
@@ -77,7 +79,7 @@ class OohLaLogGrailsPlugin {
 	//            	println 'FIELD checking '+field.name+' ' + field.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ field.getAnnotations()
 	            	if (doAll || a) {
 	            		def k = controller.logicalPropertyName + 'Controller.' + field.name
-						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.value() ?: (doAllName+'.'+field.name))
+						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.value() ?: (requestURI ? 'REQUESTED_URL' : (doAllName+'.'+field.name)))
 	            	}
 	            }
             }
@@ -88,7 +90,7 @@ class OohLaLogGrailsPlugin {
 	            	//println 'METHOD checking '+method.name+' ' + method.isAnnotationPresent(OohLaLogWebTransaction) + ' annotation '+ method.getAnnotations()
 	            	if (doAll || a) {
 	            		def k = controller.logicalPropertyName + 'Controller.' + method.name
-						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.value() ?: (doAllName+'.'+method.name))
+						if (!OohLaLogFilters.hasWebTransaction(k)) OohLaLogFilters.addWebTransaction(k, a?.value() ?: (requestURI ? 'REQUESTED_URL' : (doAllName+'.'+method.name)))
 	            	}
             	}
             }
