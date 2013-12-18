@@ -108,6 +108,7 @@ oohlalog.webtransactions.myController = true // enables counting for a specific 
 oohlalog.webtransactions.myController = 'MyCtrlr' // enables counting for a specific controller with a custom counter namespace
 oohlalog.webtransactions.myController.myAction = true // enables counting for a specific controller action the default counter name
 oohlalog.webtransactions.myController.myAction = 'myAct' // enables counting for a specific controller action with a custom counter namespace
+oohlalog.requestURI = true // will default to counting by requested URI rather than [controller].[action]
 ```
 
 To use these configurations please configure the OohLaLoh log4j appender or Config setting as mentioned above.
