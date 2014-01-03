@@ -26,7 +26,7 @@ class OohLaLogFilters {
 				if (transactionName) {
 					if (transactionName == 'REQUESTED_URL') {
 						def tokens = request.forwardURI.tokenize('/'),
-							last = tokens.remove(tokens.size() - 1)
+							last = tokens.size() > 0 ? tokens.remove(tokens.size() - 1) : ''
 						OohLaLogService.oohlaCount(tokens.join('/') + '.'+last)
 					} else {
 						OohLaLogService.oohlaCount(transactionName)
