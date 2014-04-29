@@ -6,14 +6,15 @@ grails.project.dependency.resolution = {
 
     repositories {
         grailsCentral()
+        grailsPlugins()
         mavenLocal()
         mavenCentral()
+        mavenRepo "http://nexus.bertramlabs.com/content/repositories/publicReleases"
     }
 
     dependencies {
-//        runtime 'com.google.code.gson:gson:2.2.2'
-//        compile 'com.google.code.gson:gson:2.2.2'
-//        build 'com.google.code.gson:gson:2.2.2'
+        compile 'com.google.code.gson:gson:2.2.4'
+        compile 'oohlalog:oohlalog-4j:0.1.3'
     }
 
     plugins {
