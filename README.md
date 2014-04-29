@@ -137,6 +137,20 @@ You may also enable controler Controller Action counters via Annotation. The Ann
 
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
+Integration With Spring Security
+--------------------------------
+
+It you have the Spring Security Core plugin installed you can automatically capture the principal's username (if available) as the log message "token". This can be used to trace user activity.
+
+To enable this feature:
+
+1. Install the Spring Security Core Plugin
+
+2. Add the following to `Config.groovy`.
+```
+oohlalog.springSecurityContext = true
+```
+
 
 Web Browser Logging and Counting
 --------------------------------
