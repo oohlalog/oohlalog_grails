@@ -4,11 +4,12 @@ import com.oohlalog.log4j.*
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 import org.apache.log4j.spi.LoggingEvent
-
+import org.apache.log4j.Level
+import org.apache.log4j.NDC
 class OohLaLogService {
 	private static appender = null
 
-    static LOGGING_METHODS = [oohlaCount:2, oohlaLog:6]
+    static LOGGING_METHODS = [oohlaCount:2, oohlaLog:6, setOohlaLogToken:1	]
 
 	static getOohLaLogAppender() {
 		if (!appender) {
@@ -41,6 +42,10 @@ class OohLaLogService {
 		loggingEvent.setProperty('increment', increment.toString())
 		apdr.append(loggingEvent)
 
+	}
+
+	static setOohlaLogToken = {String ctx->
+		org.apache.log4j.MDC.put('token', ctx)
 	}
 
 	static oohlaLog = {level, message, category = null, details = null, token = null, timestamp = System.currentTimeMillis() ->
