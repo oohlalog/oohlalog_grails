@@ -16,6 +16,7 @@ class OohLaLogGrailsPlugin {
 	def scm             = [ url: "https://github.com/oohlalog/oohlalog_grails" ]
 	def license         = "APACHE"
 	def loadBefore      = ['database-migration']
+    def loadAfter       = ['controllers', 'services', 'spring-security-core']
     def pluginExcludes = [
         "grails-app/views/error.gsp",
         "grails-app/controllers/com/oohlalog/test/*",

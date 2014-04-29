@@ -2,6 +2,7 @@ import com.oohlalog.log4j.*
 
 //oohlalog.webtransactions.oohLaLogTestController.test2 = 'testTwo'
 oohlalog.webtransactions = true
+oohlalog.springSecurityContext = true
 
 log4j = {
 	error	'org.codehaus.groovy.grails.web.servlet',  //  controllers
