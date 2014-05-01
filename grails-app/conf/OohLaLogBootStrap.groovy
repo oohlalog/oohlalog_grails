@@ -11,7 +11,7 @@ class OohLaLogBootStrap {
 			    	log.info('Added OohLaLog SpringSecurity filter to capture principal token')
 		    	} catch (java.lang.ClassNotFoundException  e) {
 					log.error('Unable to add OohLaLog SpringSecurity filter to capture principal token. Check that Spring Security is installed.')
-					e.printStackTrace()
+					//e.printStackTrace()
 		    	}
     		}
     	} catch (ee) {

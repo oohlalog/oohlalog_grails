@@ -14,7 +14,10 @@ grails.project.dependency.resolution = {
 
     dependencies {
         compile 'com.google.code.gson:gson:2.2.4'
-        compile 'oohlalog:oohlalog-4j:0.1.3'
+        compile 'oohlalog:oohlalog-4j:0.1.4'
+//        compile 'org.scala-lang:scala-library:2.11.0'
+//        compile 'com.outr.javasysmon:javasysmon_2.10:0.3.4'
+
     }
 
     plugins {

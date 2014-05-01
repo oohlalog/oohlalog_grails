@@ -23,7 +23,8 @@ log4j = {
 	        layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} | %p | %c | %t | %m | %x%n')
 	    rollingFile name: 'stacktrace', maxFileSize: (1 * 1024 * 1024), file: 'stacktrace.log', maxBackupIndex: 1,
 	        layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} | %p | %c | %t | %m | %x%n')
-	    appender new OohLaLogAppender( name: "oohlalog", authToken: "1adec358-09bd-49b5-834c-8343c3034a9e", maxBuffer:3,debug:true)
+//	    appender new OohLaLogAppender( name: "oohlalog", authToken: "1adec358-09bd-49b5-834c-8343c3034a9e", maxBuffer:3,debug:true)
+	    appender new OohLaLogAppender( name: "oohlalog", authToken: "295ea142-af47-4a91-a449-9cf91054a441", maxBuffer:3,debug:true, host:'localhost', port:8196, stats:true, statsInterval:5000l)
 	}
 	root {
 	info 'stdout', 'grailsLog', 'oohlalog'
