@@ -5,7 +5,7 @@ import com.oohlalog.grails.OohLaLogFilters
 import com.oohlalog.grails.OohLaLogAuthenticationFilter
 
 class OohLaLogGrailsPlugin {
-	def version         = "0.3.2"
+	def version         = "0.3.3"
 	def grailsVersion   = "2.0 > *"
 	def title           = "OohLaLog Plugin" // Headline display name of the plugin
 	def organization    = [ name: "OohLaLog", url: "http://www.oohlalog.com/" ]
@@ -35,7 +35,7 @@ class OohLaLogGrailsPlugin {
 
     def doWithSpring = {
         oohLaLogAuthFilter(OohLaLogAuthenticationFilter)
-        
+
         for(service in application.serviceClasses) {
             if (service.logicalPropertyName != 'oohLaLog') {
 	        	//println 'adding methods to ' + service.logicalPropertyName+'Service'
