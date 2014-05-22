@@ -37,7 +37,7 @@ class OohLaLogGrailsPlugin {
 
     def doWithSpring = {
         oohLaLogAuthFilter(OohLaLogAuthenticationFilter)
-        
+
         for(service in application.serviceClasses) {
             if (service.logicalPropertyName != 'oohLaLog') {
 	        	//println 'adding methods to ' + service.logicalPropertyName+'Service'
