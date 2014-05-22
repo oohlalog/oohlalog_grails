@@ -1,11 +1,13 @@
 import com.oohlalog.grails.OohLaLogService as OLLS
 
+import com.oohlalog.log4j.*
+import org.apache.log4j.Logger
 import com.oohlalog.grails.OohLaLogWebTransaction
 import com.oohlalog.grails.OohLaLogFilters
 import com.oohlalog.grails.OohLaLogAuthenticationFilter
 
 class OohLaLogGrailsPlugin {
-	def version         = "0.3.2"
+	def version         = "0.4.1"
 	def grailsVersion   = "2.0 > *"
 	def title           = "OohLaLog Plugin" // Headline display name of the plugin
 	def organization    = [ name: "OohLaLog", url: "http://www.oohlalog.com/" ]
@@ -101,7 +103,14 @@ class OohLaLogGrailsPlugin {
             OLLS.LOGGING_METHODS.each {k, v-> if (!domain.hasMetaMethod(k, getArgs(v))) domain.metaClass."${k}" = OLLS."${k}" }
         }
 //        println OohLaLogFilters.CONFIGURED_CONTROLLER_NAMES
-
+        try {
+            OohLaLogAppender appender = Logger.rootLogger.getAllAppenders().find {
+                it instanceof OohLaLogAppender
+            }
+            appender.agent = 'grails:'+version
+        } catch (Throwable t) {
+            println 'Unable to set Oohlalog agent to grails: '+t.toString()
+        }
     }
 
     def onChange = { event ->
