@@ -38,8 +38,8 @@ The following methods are available in all Domain Classes, Controllers, and Serv
 ```groovy
 	void oohlaCount(String counterName, int increment = 1)
 
-	void oohlaLog(String level, String message, String category = "[artifact name]", 
-	         Object exceptionOrStringDetails = null, String token = null, 
+	void oohlaLog(String level, String message, String category = "[artifact name]",
+	         Object exceptionOrStringDetails = null, String token = null,
 	         Long timestamp = System.currentTimeMillis() )
 ```
 These methods bypass Log4J level threshold checks.
@@ -66,12 +66,12 @@ class myService {
 To use these methods please configure the OohLaLoh log4j appender as mentioned above or add the following Config.groovy setting:
 
 ```groovy
-oohlalog.authToken='XXXX-XXXX-XXXXXXX'// REQUIRED 
-oohlalog.host="api.oohlalog.com"// OPTIONAL 
-oohlalog.path="/api/logging/save.json" // OPTIONAL 
-oohlalog.port=80 // OPTIONAL 
-oohlalog.secure=false // OPTIONAL 
-oohlalog.debug=false // OPTIONAL 
+oohlalog.authToken='XXXX-XXXX-XXXXXXX'// REQUIRED
+oohlalog.host="api.oohlalog.com"// OPTIONAL
+oohlalog.path="/api/logging/save.json" // OPTIONAL
+oohlalog.port=80 // OPTIONAL
+oohlalog.secure=false // OPTIONAL
+oohlalog.debug=false // OPTIONAL
 oohlalog.hostName=null // OPTIONAL how the log source will appear
 ```
 
@@ -103,7 +103,7 @@ All action requests will be counted as "[Controller name].[Action name]"
 You may also enable Controller Action counters via Config.groovy configuration:
 
 ```groovy
-oohlalog.webtransactions = true // globally enables counting 
+oohlalog.webtransactions = true // globally enables counting
 oohlalog.webtransactions.myController = true // enables counting for a specific controller
 oohlalog.webtransactions.myController = 'MyCtrlr' // enables counting for a specific controller with a custom counter namespace
 oohlalog.webtransactions.myController.myAction = true // enables counting for a specific controller action the default counter name
@@ -123,13 +123,13 @@ You may also enable controler Controller Action counters via Annotation. The Ann
 	@OohLaLogWebTransaction('mycont')
 	class MyController {
 
-	    def test() { 
+	    def test() {
 	    	render text:'test!!!' // counts as "mycont.test"
 	    }
 
-		
+
 		@OohLaLogWebTransaction('my.idx')
-	    def index() { 
+	    def index() {
 	    	render text:'index!!!' // counts as "my.idx"
 	    }
 	}
@@ -137,19 +137,11 @@ You may also enable controler Controller Action counters via Annotation. The Ann
 
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
 
-Integration With Spring Security
---------------------------------
+Integration With Security / Session
+-----------------------------------
 
-It you have the Spring Security Core plugin installed you can automatically capture the principal's username (if available) as the log message "token". This can be used to trace user activity.
-
-To enable this feature:
-
-1. Install the Spring Security Core Plugin
-
-2. Add the following to `Config.groovy`.
-```
-oohlalog.springSecurityContext = true
-```
+The grails ooh-la-log plugin is capable of detecting spring security and representing the username in your log token. This is great for scoping your logs while debugging user behavior.
+This plugin will also intercept the `userIdentity` and `accountIdentity` from the grails `security-bridge` plugin. In the worst case scenario, the filter will attempt to store the `JSESSIONID`.
 
 
 Web Browser Logging and Counting
@@ -216,8 +208,3 @@ olo.trace('my msg','my cat');
 All methods support chaining.
 
 To use the taglib please configure the OohLaLoh log4j appender or Config setting as mentioned above.
-
-
-
-
-
