@@ -7,7 +7,7 @@ import com.oohlalog.grails.OohLaLogFilters
 import com.oohlalog.grails.OohLaLogAuthenticationFilter
 
 class OohLaLogGrailsPlugin {
-	def version         = "0.4.3"
+	def version         = "0.4.4"
 	def grailsVersion   = "2.0 > *"
 	def title           = "OohLaLog Plugin" // Headline display name of the plugin
 	def organization    = [ name: "OohLaLog", url: "http://www.oohlalog.com/" ]
@@ -104,10 +104,14 @@ class OohLaLogGrailsPlugin {
         }
 //        println OohLaLogFilters.CONFIGURED_CONTROLLER_NAMES
         try {
-            OohLaLogAppender appender = Logger.rootLogger.getAllAppenders().find {
-                it instanceof OohLaLogAppender
+            OohLaLogAppender appender = Logger.rootLogger.getAllAppenders().each {
+                if(it instanceof OohLaLogAppender) {
+					if(it.agent == 'log4j') {
+						it.agent = 'grails:'+version
+					}
+				}
             }
-            appender.agent = 'grails:'+version
+
         } catch (Throwable t) {
             println 'Unable to set Oohlalog agent to grails: '+t.toString()
         }
