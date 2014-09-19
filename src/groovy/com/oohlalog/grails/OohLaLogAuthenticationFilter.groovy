@@ -16,8 +16,8 @@ class OohLaLogAuthenticationFilter implements javax.servlet.Filter {
     private static final log = LogFactory.getLog(this)
 
     def getContextHolder() {
-        h = h ?: Class.forName('org.springframework.security.core.context.SecurityContextHolder')
-        return h
+        contextHolder = contextHolder ?: Class.forName('org.springframework.security.core.context.SecurityContextHolder')
+        return contextHolder
     }
 
 
