@@ -26,6 +26,8 @@ Appender properties:
 - secure [false]
 - debug [false]
 - hostName [null] // how the log source will appear
+- maxBuffer [100] // how many log events will be buffered before being sent to oohlalog
+- timeBuffer [10000] // how many milliseconds between buffer flushes
 
 
 The above configuration will automatically forward log messages of info level or higher to your oohlalog app. Simply visit oohlalog.com to signup and get your api token.
