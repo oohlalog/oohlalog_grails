@@ -29,7 +29,7 @@ class OohLaLogAuthenticationFilter implements javax.servlet.Filter {
     void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         try {
             if (getContextHolder() && getContextHolder().context.authentication?.principal) {
-                org.apache.log4j.MDC.put('token', h.context.authentication.principal.username)
+                org.apache.log4j.MDC.put('token', contextHolder.context.authentication.principal.username)
             } else if(sharedSecurityService) {
                 org.apache.log4j.MDC.put('token', "${sharedSecurityService.userIdentity}-${sharedSecurityService.accountIdentity}")
             } else {
