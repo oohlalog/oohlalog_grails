@@ -9,12 +9,11 @@ grails.project.dependency.resolution = {
         grailsPlugins()
         mavenLocal()
         mavenCentral()
-        mavenRepo "http://nexus.bertramlabs.com/content/repositories/publicReleases"
     }
 
     dependencies {
         compile 'com.google.code.gson:gson:2.2.4'
-        compile 'oohlalog:oohlalog-4j:0.2.3'
+        compile 'com.oohlalog:oohlalog-4j:1.0.2'
 //        compile 'org.scala-lang:scala-library:2.11.0'
 //        compile 'com.outr.javasysmon:javasysmon_2.10:0.3.4'
 
